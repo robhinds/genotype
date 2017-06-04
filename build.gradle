@@ -1,0 +1,34 @@
+group = "io.github.robhinds"
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "3.5"
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.maiflai:gradle-scalatest:0.15"
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repository.apache.org/content/repositories/snapshots" }
+}
+
+apply {
+    plugin "scala"
+    plugin "com.github.maiflai.scalatest"
+}
+
+dependencies {
+    compile "org.scala-lang:scala-library:2.11.8"
+    compile "com.chuusai:shapeless_2.11:2.3.2"
+    testCompile 'org.scalatest:scalatest_2.11:3.0.0'
+    testRuntime 'org.pegdown:pegdown:1.6.0'
+}
