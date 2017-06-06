@@ -28,7 +28,6 @@ class GeneratorSpec extends FunSpec with Matchers {
       case class Test(x: IntGene, y: DoubleGene, z: BooleanGene)
       val c = Generic[Test].to(Test(IntGene(), DoubleGene(), BooleanGene()))
       generate(c)
-      generate(Test(IntGene(), DoubleGene(), BooleanGene()))
     }
     it("what happens with sealed traits") {
       sealed trait Shape
@@ -37,6 +36,11 @@ class GeneratorSpec extends FunSpec with Matchers {
 
       val c = Generic[Shape].to(Circle(1))
       generate(c)
+    }
+    it("should generate for a simple case class") {
+      case class Test(x: IntGene, y: DoubleGene, z: BooleanGene)
+      val g = generate(Test(IntGene(), DoubleGene(), BooleanGene()))
+      println(g)
     }
   }
 
