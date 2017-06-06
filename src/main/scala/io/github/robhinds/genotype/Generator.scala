@@ -45,8 +45,8 @@ object Generator {
       override def generate(a: H :+: T) = throw new RuntimeException("Invalid candidate configuration")
     }
 
-  implicit def genericToGenerator[T, Repr](implicit gen: Generic.Aux[T, Repr], reprGenerator: Generator[Repr]) =
+  implicit def genericToGenerator[T, L <: HList](implicit generic: Generic.Aux[T, L], lGen: Generator[L]): Generator[T] =
     new Generator[T] {
-      override def generate(a: T): T = gen.from(reprGenerator.generate(gen.to(a)))
+      override def generate(a: T) = generic.from(lGen.generate(generic.to(a)))
     }
 }

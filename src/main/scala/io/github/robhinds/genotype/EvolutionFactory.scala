@@ -6,7 +6,8 @@ import Generator.generate
 
 import scala.annotation.tailrec
 
-case class EvolutionFactory[A: Generic](c: A, pc: PopulationConfig, ec: EvolutionConfig) {
+case class EvolutionFactory[A](c: A, pc: PopulationConfig, ec: EvolutionConfig)
+  (implicit gen: Generator[A]) {
 
   def run = {
     @tailrec
@@ -23,12 +24,6 @@ case class EvolutionFactory[A: Generic](c: A, pc: PopulationConfig, ec: Evolutio
   }
 
   private def generateCandidates(popSize: Int = pc.size) = {
-    (0 to popSize) map { i =>
-      val hl = Generic[A].to(c)
-      //hl
-      //val rando = generate(hl)
-      //Generic[A].from(rando)
-    }
-    List[A]()
+    (0 to popSize).map(i => generate(c))
   }
 }
