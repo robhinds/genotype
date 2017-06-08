@@ -1,8 +1,8 @@
-package io.github.robhinds.genotype
+package io.github.robhinds.genotype.evolution
 
-import org.scalatest.{FunSpec, Matchers}
-import Generator.generate
 import io.github.robhinds.genotype.Genes.{BooleanGene, DoubleGene, IntGene}
+import io.github.robhinds.genotype.evolution.Generator.generate
+import org.scalatest.{FunSpec, Matchers}
 import shapeless._
 
 class GeneratorSpec extends FunSpec with Matchers {
@@ -35,12 +35,13 @@ class GeneratorSpec extends FunSpec with Matchers {
       case class Circle(radius: Int) extends Shape
 
       val c = Generic[Shape].to(Circle(1))
-      generate(c)
+      assertThrows[RuntimeException] {
+        generate(c)
+      }
     }
     it("should generate for a simple case class") {
       case class Test(x: IntGene, y: DoubleGene, z: BooleanGene)
-      val g = generate(Test(IntGene(), DoubleGene(), BooleanGene()))
-      println(g)
+      generate(Test(IntGene(), DoubleGene(), BooleanGene()))
     }
   }
 

@@ -1,8 +1,7 @@
-package io.github.robhinds.genotype
+package io.github.robhinds.genotype.evolution
 
-import io.github.robhinds.genotype.Genes.{BooleanGene, DoubleGene, Gene, IntGene}
-import shapeless._
-import shapeless.{HList, HNil}
+import io.github.robhinds.genotype.Genes.{BooleanGene, DoubleGene, IntGene}
+import shapeless.{HList, HNil, _}
 
 import scala.util.Random
 
