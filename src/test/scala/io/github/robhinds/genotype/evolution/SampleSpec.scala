@@ -12,7 +12,7 @@ class SampleSpec extends FunSpec with Matchers {
       case class ThreeNumbers(x: IntGene, y: IntGene, z: IntGene)
       val results = EvolutionFactory(
         candidate = ThreeNumbers(IntGene(0, 1000), IntGene(0, 1000), IntGene(0, 1000)),
-        populationConfig = PopulationConfig(50),
+        populationConfig = PopulationConfig(100),
         evolutionConfig = EvolutionConfig(50),
         errorRate = (c: ThreeNumbers) => Math.abs(100000.0 - (c.x.value.get * c.y.value.get * c.z.value.get))
       ).run
